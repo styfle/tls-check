@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "Check the TLS protocol support of one or more web servers",
   "main": "index.js",
-  "bin": "cli.js",
+  "bin": {
+    "tls-check": "cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
