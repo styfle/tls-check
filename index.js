@@ -2,13 +2,13 @@ const tls = require('tls');
 
 /**
  * 
- * @param {{host: string, port: number, secureProtocol: string}} o 
+ * @param {{hostname: string, port: number, secureProtocol: string}} o 
  */
 function tlsCheck(o) {
     return new Promise((resolve, reject) => {
         const opt = {
-            host: o.host,
-            port: o.port,
+            host: o.hostname,
+            port: o.port || 443,
             secureContext: tls.createSecureContext({ secureProtocol: o.secureProtocol })
         }
         const socket = tls.connect(opt, () => {
