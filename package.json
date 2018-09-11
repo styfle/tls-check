@@ -2,6 +2,7 @@
   "name": "tls-check",
   "version": "0.2.0",
   "description": "Check the TLS protocol support of one or more web servers",
+  "repository": "styfle/tls-check",
   "main": "index.js",
   "bin": {
     "tls-check": "cli.js"
@@ -11,7 +12,9 @@
   },
   "keywords": [
     "tls",
-    "protocol"
+    "ssl",
+    "protocol",
+    "scanner"
   ],
   "author": "styfle",
   "license": "MIT"
