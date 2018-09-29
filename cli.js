@@ -4,7 +4,7 @@ const tlsCheck = require('./index');
 const methods = require('./methods');
 
 async function main() {
-    const [_node, _file, ...args] = process.argv;
+    const args = process.argv.slice(2);
     console.log(`Checking TLS against ${args.length} website(s)...\n`);
 
     for (let arg of args) {
