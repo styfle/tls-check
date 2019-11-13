@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const tlsCheck = require('./index');
-const methods = require('./methods');
+const versions = require('./methods');
 
 async function main() {
     const args = process.argv.slice(2);
@@ -12,8 +12,8 @@ async function main() {
             arg = 'https://' + arg;
         }
         let { hostname, port } = new URL(arg);
-        for (let secureProtocol of methods) {
-            const res = await getFormattedResult(hostname, port, secureProtocol);
+        for (let version of versions) {
+            const res = await getFormattedResult({ hostname, port, version });
             console.log(res);
         }
         console.log(' ');
@@ -24,17 +24,24 @@ async function main() {
  * Get the formatted result with emoji and all.
  * @param {string} hostname 
  * @param {number} port 
- * @param {string} secureProtocol 
+ * @param {string} version 
  */
-async function getFormattedResult(hostname, port, secureProtocol) {
-    let emoji = '✔'
+async function getFormattedResult({ hostname, port, version }) {
+    let emoji = '✅'
+    let message = 'Supported.';
     try {
-        await tlsCheck({hostname, port, secureProtocol});
+        await tlsCheck({ hostname, port, version });
     } catch (e) {
         emoji = '❌';
+        if (e.code === 'ERR_TLS_INVALID_PROTOCOL_VERSION') {
+            emoji = '🔶';
+            message = 'Your client does not support this version. Try to update OpenSSL';
+        } else if (e.code === 'ECONNRESET') {
+            message = 'Server does not support this version.';
+        }
     }
     const origin = port ? `${hostname}:${port}` : hostname;
-    return `${emoji} ${origin} ${secureProtocol}`;
+    return `${emoji} ${origin} ${version} ${message}`;
 }
 
 main();

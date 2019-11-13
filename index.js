@@ -1,17 +1,19 @@
-const tls = require('tls');
+const { createSecureContext, connect }  = require('tls');
 
 /**
  * 
- * @param {{hostname: string, port: number, secureProtocol: string}} o 
+ * @param {{hostname: string, port: number, version: string}} o 
  */
-function tlsCheck(o) {
+function tlsCheck({ hostname, port, version }) {
     return new Promise((resolve, reject) => {
+        const secureContext = createSecureContext({ minVersion: version, maxVersion: version });
         const opt = {
-            host: o.hostname,
-            port: o.port || 443,
-            secureContext: tls.createSecureContext({ secureProtocol: o.secureProtocol })
+            host: hostname,
+            servername: hostname,
+            port: port || 443,
+            secureContext,
         }
-        const socket = tls.connect(opt, () => {
+        const socket = connect(opt, () => {
             if (!socket.authorized) {
                 reject(socket.authorizationError);
                 return;
