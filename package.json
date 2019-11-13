@@ -1,6 +1,6 @@
 {
   "name": "tls-check",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Check the TLS protocol support of one or more web servers",
   "repository": "styfle/tls-check",
   "main": "index.js",
