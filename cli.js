@@ -28,16 +28,19 @@ async function main() {
  */
 async function getFormattedResult({ hostname, port, version }) {
     let emoji = '✅'
-    let message = 'Supported.';
+    let message = 'Enabled.';
     try {
         await tlsCheck({ hostname, port, version });
     } catch (e) {
-        emoji = '❌';
         if (e.code === 'ERR_TLS_INVALID_PROTOCOL_VERSION') {
             emoji = '🔶';
-            message = 'Your client does not support this version. Try to update OpenSSL.';
+            message = 'Your client had a problem. Try updating OpenSSL.';
         } else if (e.code === 'ECONNRESET') {
-            message = 'Server does not support this version.';
+            emoji = '❌';
+            message = 'Disabled.';
+        } else {
+            emoji = '🤦‍♀️';
+            message = e.toString();
         }
     }
     const origin = port ? `${hostname}:${port}` : hostname;
