@@ -35,7 +35,7 @@ async function getFormattedResult({ hostname, port, version }) {
         emoji = '❌';
         if (e.code === 'ERR_TLS_INVALID_PROTOCOL_VERSION') {
             emoji = '🔶';
-            message = 'Your client does not support this version. Try to update OpenSSL';
+            message = 'Your client does not support this version. Try to update OpenSSL.';
         } else if (e.code === 'ECONNRESET') {
             message = 'Server does not support this version.';
         }
