@@ -7,27 +7,26 @@
 Pass one or more hostnames with optional port to see a list of supported protocols that each server supports.
 
 ```sh
-npx tls-check google.com https://bing.com github.com:443
+npx tls-check google.com https://bing.com zeit.co:443
 ```
 
 ```sh
 Checking TLS against 3 website(s)...
 
-❌ google.com SSLv3_method
-✔ google.com TLSv1_method
-✔ google.com TLSv1_1_method
-✔ google.com TLSv1_2_method
+✅ google.com TLSv1 Enabled.
+✅ google.com TLSv1.1 Enabled.
+✅ google.com TLSv1.2 Enabled.
+✅ google.com TLSv1.3 Enabled.
 
-❌ bing.com SSLv3_method
-✔ bing.com TLSv1_method
-✔ bing.com TLSv1_1_method
-✔ bing.com TLSv1_2_method
+✅ bing.com TLSv1 Enabled.
+✅ bing.com TLSv1.1 Enabled.
+✅ bing.com TLSv1.2 Enabled.
+❌ bing.com TLSv1.3 Disabled.
 
-❌ github.com SSLv3_method
-❌ github.com TLSv1_method
-❌ github.com TLSv1_1_method
-✔ github.com TLSv1_2_method
-
+❌ zeit.co TLSv1 Disabled.
+❌ zeit.co TLSv1.1 Disabled.
+✅ zeit.co TLSv1.2 Enabled.
+✅ zeit.co TLSv1.3 Enabled.
 ```
 
 ## Support
